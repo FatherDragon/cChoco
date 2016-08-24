@@ -69,6 +69,10 @@ function Set-TargetResource
         Download-File $ChocoInstallScriptUrl $file
         . $file
         
+        # Run choco -v: This will create the deafult config file so that can be edited by other cChoco resources
+        # ErrorAction is set to SilentlyContinue 
+        $version = Start-Process -FilePath "$InstallDir\Choco.exe" -ArgumentList "-v" -Wait -ErrorAction SilentlyContinue
+         
         #InstallChoco $InstallDir
         Write-Verbose '[ChocoInstaller] Finish InstallChoco'
 
